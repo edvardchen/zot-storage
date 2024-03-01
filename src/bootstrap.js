@@ -1,4 +1,4 @@
-const pluginID = 'zotstorage';
+const pluginID = "zot-storage@example.com";
 
 function error() {
   if (arguments[0] instanceof Error) {
@@ -7,22 +7,22 @@ function error() {
   }
   const m = [].slice
     .apply(arguments)
-    .map((item) => (typeof item === 'string' ? item : JSON.stringify(item)))
-    .join(' ');
+    .map((item) => (typeof item === "string" ? item : JSON.stringify(item)))
+    .join(" ");
   Zotero.logError(new Error(`[${pluginID}] ${m}`));
 }
 
 function log() {
   const m = [].slice
     .apply(arguments)
-    .map((item) => (typeof item === 'string' ? item : JSON.stringify(item)))
-    .join(' ');
+    .map((item) => (typeof item === "string" ? item : JSON.stringify(item)))
+    .join(" ");
   Zotero.log(`[${pluginID}] ${m}`);
 }
 
 // eslint-disable-next-line no-unused-vars
 function install() {
-  log('Installed 2.0');
+  log("Installed 2.0");
 }
 
 /**
@@ -33,12 +33,12 @@ function install() {
  */
 // eslint-disable-next-line no-unused-vars
 function startup({ id, version, rootURI }) {
-  log('Starting 2.0');
+  log("Starting 2.0");
 
   Zotero.PreferencePanes.register({
     pluginID,
-    src: rootURI + 'preferences.xhtml',
-    scripts: [rootURI + 'preferences.js'],
+    src: rootURI + "preferences.xhtml",
+    scripts: [rootURI + "preferences.js"],
   });
 
   ZotStorage.init({ id, version, rootURI });
@@ -52,13 +52,13 @@ function onMainWindowUnload({ window }) {}
 
 // eslint-disable-next-line no-unused-vars
 function shutdown() {
-  log('Shutting down 2.0');
+  log("Shutting down 2.0");
   ZotStorage.removeFromAllWindows();
 }
 
 // eslint-disable-next-line no-unused-vars
 function uninstall() {
-  log('Uninstalled 2.0');
+  log("Uninstalled 2.0");
 }
 
 // ─── Main ────────────────────────────────────────────────────────────────────
@@ -90,23 +90,23 @@ var ZotStorage = (() => {
      */
     addToWindow(window) {
       // Use Fluent for localization
-      window.MozXULElement.insertFTLIfNeeded('zot-storage.ftl');
+      window.MozXULElement.insertFTLIfNeeded("zot-storage.ftl");
 
       const that = this;
 
       const doc = window.document;
-      addToItemMenu(doc, doc.createXULElement('menuseparator'));
+      addToItemMenu(doc, doc.createXULElement("menuseparator"));
 
       /**
        * @type {Element}
        */
-      const el = doc.createXULElement('menuitem');
+      const el = doc.createXULElement("menuitem");
       that.destroyCallBacks.push(() => {
         el.remove();
       });
 
-      el.addEventListener('command', moveSelectedItems);
-      el.setAttribute('data-l10n-id', 'move-and-rename');
+      el.addEventListener("command", moveSelectedItems);
+      el.setAttribute("data-l10n-id", "move-and-rename");
 
       addToItemMenu(doc, el);
     },
@@ -120,7 +120,7 @@ var ZotStorage = (() => {
     },
 
     removeFromAllWindows() {
-      log('remove all elements');
+      log("remove all elements");
       this.destroyCallBacks.map((item) => item());
       this.destroyCallBacks = [];
     },
@@ -175,7 +175,7 @@ function moveSelectedItems() {
       const cloned = a.clone(null, { includeCollections: true });
       cloned.attachmentLinkMode = Zotero.Attachments.LINK_MODE_LINKED_FILE;
       cloned.attachmentPath = targetPath;
-      cloned.setField('title', PathUtils.filename(targetPath));
+      cloned.setField("title", PathUtils.filename(targetPath));
       await IOUtils.move(originalPath, targetPath, {
         noOverwrite: true,
       });
@@ -194,7 +194,7 @@ function moveSelectedItems() {
  * @returns {string}
  */
 function getLinkedDir() {
-  return Zotero.Prefs.get('extensions.zotero.baseAttachmentPath', true);
+  return Zotero.Prefs.get("extensions.zotero.baseAttachmentPath", true);
 }
 
 /**
@@ -203,6 +203,6 @@ function getLinkedDir() {
  * @param {Element} elm
  */
 function addToItemMenu(doc, elm) {
-  const zotero_itemmenu = doc.getElementById('zotero-itemmenu');
+  const zotero_itemmenu = doc.getElementById("zotero-itemmenu");
   zotero_itemmenu.appendChild(elm);
 }

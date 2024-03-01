@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "zot-storage",
+  "version": "0.1",
+  "description": "Zotero linked file external storage",
+  "homepage_url": "https://github.com/edvardchen/zot-storage",
+  "applications": {
+    "zotero": {
+      "id": "zot-storage@example.com",
+      "update_url": "https://zotero-download.s3.amazonaws.com/tmp/make-it-red/updates-2.0.json",
+      "strict_min_version": "6.999",
+      "strict_max_version": "7.0.*"
+    }
+  }
+}

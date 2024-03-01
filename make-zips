@@ -1,0 +1,11 @@
+#!/bin/bash
+set -euo pipefail
+
+rm -rf build
+mkdir build
+
+cd src
+zip -r ../build/zot-storage.xpi *
+cd ../build
+
+jq ".addons[].updates[0].update_hash = \"sha256:$(shasum -a 256 zot-storage.xpi | cut -d' ' -f1)\"" ../updates.json >updates.json
