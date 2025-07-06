@@ -1,25 +1,30 @@
 {
-  "name": "make-it-red",
-  "version": "1.0.0",
-  "description": "A sample plugin for Zotero 7",
+  "name": "zot-storage",
+  "version": "0.1.0",
+  "description": "Zotero linked file external storage plugin",
   "main": "bootstrap.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zotero/make-it-red.git"
+    "url": "git+https://github.com/edvardchen/zot-storage.git"
   },
-  "keywords": [],
+  "keywords": [
+    "zotero",
+    "plugin",
+    "storage"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zotero/make-it-red/issues"
+    "url": "https://github.com/edvardchen/zot-storage/issues"
   },
-  "homepage": "https://github.com/zotero/make-it-red#readme",
+  "homepage": "https://github.com/edvardchen/zot-storage#readme",
   "devDependencies": {
     "@types/bluebird": "^3.5.42",
     "eslint": "^8.57.0",
-    "zotero-types": "^1.3.18"
+    "typescript": "^5.8.3",
+    "zotero-types": "^4.0.5"
   }
 }

@@ -194,7 +194,10 @@ function moveSelectedItems() {
  * @returns {string}
  */
 function getLinkedDir() {
-  return Zotero.Prefs.get("extensions.zotero.baseAttachmentPath", true);
+  return (
+    Zotero.Prefs.get("extensions.zot-storage.linkedDir", true) ||
+    Zotero.Prefs.get("extensions.zotero.baseAttachmentPath", true)
+  );
 }
 
 /**
