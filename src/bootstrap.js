@@ -45,10 +45,14 @@ function startup({ id, version, rootURI }) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function onMainWindowLoad({ window }) {}
+function onMainWindowLoad({ window }) {
+  ZotStorage.addToWindow(window);
+}
 
 // eslint-disable-next-line no-unused-vars
-function onMainWindowUnload({ window }) {}
+function onMainWindowUnload({ window }) {
+  ZotStorage.removeFromWindow(window);
+}
 
 // eslint-disable-next-line no-unused-vars
 function shutdown() {
@@ -136,7 +140,7 @@ function getAttachmentsOfSelectedItems() {
   const items = Zotero.getActiveZoteroPane().getSelectedItems();
   const result = [];
 
-  items.map((item) => {
+  items.forEach((item) => {
     if (item.isAttachment()) {
       result.push(item);
     } else {
@@ -207,5 +211,7 @@ function getLinkedDir() {
  */
 function addToItemMenu(doc, elm) {
   const zotero_itemmenu = doc.getElementById("zotero-itemmenu");
-  zotero_itemmenu.appendChild(elm);
+  if (zotero_itemmenu) {
+    zotero_itemmenu.appendChild(elm);
+  }
 }
